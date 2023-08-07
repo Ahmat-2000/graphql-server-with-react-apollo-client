@@ -30,7 +30,7 @@ const typeDefs = gql`
     type Movie{
         id: ID!
         name: String!
-        yearOfPubication: Int!
+        yearOfPublication: Int!
         isAnAnimation: Boolean!
     }
 
@@ -38,9 +38,31 @@ const typeDefs = gql`
         users : [User!]!
         user(id: ID!): User
         movies: [Movie!]!
-        movie(name: String!): Movie!
+        movie(name: String!): Movie
+    }
+
+    input createUserInput{
+        name: String!
+        username: String!
+        age: Int!
+        nationality: Nationality = TCHAD
+    }
+
+    type Mutation{
+        createUser(userInput: createUserInput!): User!
+        updateUserName(userId: ID!, newName: String!): User!
+        deleteUser(id: ID!): Boolean!
     }
 `;
 // enums allow us to validate data for some fields
-
+// input allow us to create some sort of abtract type of another type
+// it's helpfull, cause within an input, we can pass default value to fields like
+/*  age is equal 18 by default
+    input creatUserInput{
+        name: String!
+        username: String!
+        age: Int = 18 
+        nationality: Nationality!
+    }
+*/
 module.exports = {typeDefs};

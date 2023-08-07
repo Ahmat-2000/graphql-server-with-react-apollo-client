@@ -9,13 +9,13 @@ const {UserList, MovieList} = require("../FakeData");
 // element in array with some specifics fields
 const _ = require('lodash');
 const resolvers = {
-    // Query is the object containing all queries resolvers
+    // Query is the object containing all queries resolvers(GET request)
     // resolvers should be the same as the ones defined in type-defs.js
     // we can write our resolver in two ways, either write them like normal
     // functions or arrow funtions.
     Query: {
         // User Resolvers
-        users(){
+        users: () => {
             return UserList;
         },
         // the parent object hold information about the parent resolver which call this resolver
@@ -42,10 +42,35 @@ const resolvers = {
     // In our case, we're gonna link the User type to Movie Type
     // The favoriteMovies: [Movie] in User type must return a list of movies
     User: {
-        favoriteMovies(){
+        favoriteMovies: () =>{
             // return all anime movies
             return _.filter(MovieList,(movie) => movie.isAnAnimation === true);
         }  
+    },
+
+    Mutation: {
+        createUser: (parent, args) => {
+            const user = args.userInput;
+            const lastId = UserList[UserList.length -1].id;
+            user.id = lastId +1;
+            UserList.push(user);
+            return user;
+        },
+        updateUserName: (parent,args) => {
+            const {userId, newName} = args;
+            UserList.forEach((user) => {
+                // we have to cast the id because all user inputs are strings
+                if (user.id === Number(userId)) {
+                    user.name = newName;
+                }
+            });
+            return _.find(UserList, {id: Number(userId)});
+        },
+        deleteUser: (parent,args) => {
+            const idToDelete = Number(args.id);
+            _.remove(UserList, (user) => user.id === idToDelete);
+            return true;
+        }
     }
 }
 

@@ -73,31 +73,31 @@ const MovieList = [
    {
       id: 1,
       name: "One piece red",
-      yearOfPubication: 2023,
+      yearOfPublication: 2023,
       isAnAnimation: true
    },
    {
       id: 2,
       name: "One piece Strong",
-      yearOfPubication: 2015,
+      yearOfPublication: 2015,
       isAnAnimation: true
    },
    {
       id: 3,
       name: "Bat Man",
-      yearOfPubication: 2020,
+      yearOfPublication: 2020,
       isAnAnimation: true
    },
    {
       id: 4,
       name: "Rash Four",
-      yearOfPubication: 2000,
+      yearOfPublication: 2000,
       isAnAnimation: false
    },
    {
       id: 5,
       name: "Rash Four 2",
-      yearOfPubication: 2005,
+      yearOfPublication: 2005,
       isAnAnimation: false
    },
 ];
